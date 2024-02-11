@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    
+    stages
+    {
+       stage ('Build')
+       {
+       steps
+       {
+        git https://github.com/Santosh7487/estore-Backend-app.git
+        sh "./mvnw compile"
+        echo "Building project with maven"
+       } 
+       }
+
+       stage('Test'){
+        steps{
+            sh "./mvnw test"
+            echo "test stage finished"
+
+        }
+       }
+       stage ('package')
+       {
+        steps{
+            sh "./mvnw package"
+            echo"packaging the project with maven"
+        }
+       }
+    }
+}
